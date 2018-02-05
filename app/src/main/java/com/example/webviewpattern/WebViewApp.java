@@ -1,46 +1,28 @@
 package com.example.webviewpattern;
 
-import android.app.Application;
 
-import com.example.webviewpattern.Dagger2Utils.DaggerModelComponent;
-import com.example.webviewpattern.Dagger2Utils.ModelComponent;
-import com.example.webviewpattern.model.Model;
+import com.example.webviewpattern.Dagger2Utils.AppModule;
+import com.example.webviewpattern.Dagger2Utils.DaggerAppComponent;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+
 
 /**
  * Created by Дом on 31.01.2018.
  */
 
-public class WebViewApp extends Application {
+public class WebViewApp extends DaggerApplication {
 
-    protected static WebViewApp instance;
-
-    public static WebViewApp getInstance(){
-        return instance;
+    @Inject
+    public WebViewApp() {
     }
-
-    private ModelComponent modelComponent;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
-        instance = this;
-
-        modelComponent = buildModel();
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().
+                appModule(new AppModule(this)).build();
     }
-
-    private ModelComponent buildModel() {
-        return DaggerModelComponent.builder()
-                .model(new Model(this))
-                .build();
-    }
-
-    public ModelComponent getModelComponent() {
-        return modelComponent;
-    }
-
-    public void clearModelComponent(){
-        modelComponent = null;
-    }
-
 }

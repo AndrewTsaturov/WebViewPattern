@@ -9,11 +9,12 @@ public interface IAppPresenter {
     int LOADING_TIMER = 4000;
 
     void onViewInit();
-    void onBackButtonPressed();
 
     void onPositiveWarningClick();
     void onNegativeWarningClick();
 
     void setSettingChanged(boolean isSettingsChanged);
     boolean isSettingsChanged();
+
+    void gameIsLoaded();
 }

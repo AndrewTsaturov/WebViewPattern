@@ -4,6 +4,7 @@ package com.example.webviewpattern.presenter;
 import android.os.Handler;
 
 import com.example.webviewpattern.WebViewApp;
+import com.example.webviewpattern.model.IModel;
 import com.example.webviewpattern.model.Model;
 import com.example.webviewpattern.view.IView;
 
@@ -19,27 +20,21 @@ public class AppPresenter implements IAppPresenter {
     private static boolean isSettingsChanged;
 
     @Inject
-    Model model;
+    IModel model;
 
-    private IView view;
+    @Inject
+    IView view;
 
 
+    @Inject
     public AppPresenter(IView view) {
         this.view = view;
-
-
-        WebViewApp.getInstance().getModelComponent().inject(this);
     }
 
     @Override
     public void onViewInit() {
         start();
       }
-
-    @Override
-    public void onBackButtonPressed() {
-       view.stopView();
-    }
 
     @Override
     public void onPositiveWarningClick() {
@@ -60,6 +55,11 @@ public class AppPresenter implements IAppPresenter {
     @Override
     public boolean isSettingsChanged() {
         return isSettingsChanged;
+    }
+
+    @Override
+    public void gameIsLoaded() {
+        view.hideLoading();
     }
 
     private void loadGame() {
