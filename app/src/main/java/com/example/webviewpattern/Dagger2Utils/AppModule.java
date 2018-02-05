@@ -2,7 +2,6 @@ package com.example.webviewpattern.Dagger2Utils;
 
 import android.content.Context;
 
-import com.example.webviewpattern.WebViewApp;
 import com.example.webviewpattern.model.Model;
 
 import javax.inject.Inject;

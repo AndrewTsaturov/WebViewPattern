@@ -1,9 +1,7 @@
 package com.example.webviewpattern.Dagger2Utils;
 
-import com.example.webviewpattern.view.IView;
 import com.example.webviewpattern.view.MainActivity;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 

@@ -51,17 +51,6 @@ public class MainActivity extends DaggerActivity implements IView{
         params = (LinearLayout.LayoutParams) loadingImgView.getLayoutParams();
         progressBarHeight = params.height;
 
-        gameWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                presenter.gameIsLoaded();
-
-                super.onPageFinished(view, url);
-            }
-        });
-        gameWebView.setWebChromeClient(new WebChromeClient());
-
-        presenter.onViewInit();
 
         if(networkWarningDialog == null) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -76,6 +65,16 @@ public class MainActivity extends DaggerActivity implements IView{
         }
 
         networkWarningDialog.dismiss();
+
+        gameWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                presenter.gameIsLoaded();
+            }
+        });
+        gameWebView.setWebChromeClient(new WebChromeClient());
+
+        presenter.onViewInit();
     }
 
     @Override
@@ -117,7 +116,7 @@ public class MainActivity extends DaggerActivity implements IView{
     }
 
     @Override
-    public void showLackOfNewtworkWarning() {
+    public void showLackOfNetworkWarning() {
         networkWarningDialog.show();
     }
 

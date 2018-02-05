@@ -5,8 +5,8 @@
 
     <string name= "game_link">https://evolts.mobi/</string>
 
-    <string name="warning_gialog_title">Внимание</string>
-    <string name="warning_dialog_msg">Отсутствует подключение к Интеренету</string>
+    <string name="warning_gialog_title">Внимание!</string>
+    <string name="warning_dialog_msg">Отсутствует подключение к сети</string>
     <string name="warning_dialog_pos_button">Настройки</string>
     <string name="warnin_dialog_neg_button">Выйти</string>
 

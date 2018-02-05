@@ -1,11 +1,5 @@
 package com.example.webviewpattern.presenter;
-
-
-import android.os.Handler;
-
-import com.example.webviewpattern.WebViewApp;
 import com.example.webviewpattern.model.IModel;
-import com.example.webviewpattern.model.Model;
 import com.example.webviewpattern.view.IView;
 
 import javax.inject.Inject;
@@ -68,40 +62,10 @@ public class AppPresenter implements IAppPresenter {
 
     private void start() {
         view.showLoading();
+        if(model.isConnected())
+            view.showGame(model.getUrl());
 
-        Handler handler = new Handler();
-
-        Thread thread = new Thread(){
-            @Override
-            public void run() {
-                try {
-                    int timer = 0;
-                    while (timer < LOADING_TIMER){
-                        handler.post(()-> {
-                            if (model.isConnected()) {loadGame();
-                            setSettingChanged(false);
-                            }
-                        });
-
-                        sleep(LOADING_CYCLE_DELAY);
-                        timer = timer + (int) LOADING_CYCLE_DELAY;
-                    }
-
-                    handler.post(() -> {
-                        if(model.isConnected())
-                        view.hideLoading();
-
-                        else view.showLackOfNewtworkWarning();
-                    });
-                }
-
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        thread.start();
+        else view.showLackOfNetworkWarning();
     }
 
 
