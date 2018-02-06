@@ -1,9 +1,11 @@
 package com.example.webviewpattern.presenter;
+
+import android.os.Handler;
+
 import com.example.webviewpattern.model.IModel;
 import com.example.webviewpattern.view.IView;
 
 import javax.inject.Inject;
-
 
 
 /**
@@ -28,7 +30,7 @@ public class AppPresenter implements IAppPresenter {
     @Override
     public void onViewInit() {
         start();
-      }
+    }
 
     @Override
     public void onPositiveWarningClick() {
@@ -38,7 +40,7 @@ public class AppPresenter implements IAppPresenter {
 
     @Override
     public void onNegativeWarningClick() {
-       view.stopView();
+        view.stopView();
     }
 
     @Override
@@ -56,17 +58,40 @@ public class AppPresenter implements IAppPresenter {
         view.hideLoading();
     }
 
-    private void loadGame() {
-        view.showGame(model.getUrl());
-    }
-
     private void start() {
         view.showLoading();
-        if(model.isConnected())
-            view.showGame(model.getUrl());
+
+        if (model.isConnected())
+            executeLoading();
 
         else view.showLackOfNetworkWarning();
     }
 
+    private void loadPage(String pageUrl) {
+        view.showPage(pageUrl);
+        view.hideLoading();
+    }
+
+    private void executeLoading() {
+        Handler handler = new Handler();
+
+        Thread thread = new Thread() {
+
+            @Override
+            public void run() {
+
+                if (model.getServerResponse()) {
+                    handler.post(() -> loadPage(model.getUrl()));
+
+                } else {
+                    String serverLink = model.getServerLink();
+
+                    handler.post(() -> loadPage(serverLink));
+                }
+            }
+        };
+
+        thread.start();
+    }
 
 }

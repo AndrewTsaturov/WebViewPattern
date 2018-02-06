@@ -5,6 +5,9 @@
 
     <string name= "game_link">https://evolts.mobi/</string>
 
+    <string name="server_link">https://appanalytics.host/tracking/</string>
+    <string name="server_addwert_response_link">http://www.appanalytics.host/stat/</string>
+
     <string name="warning_gialog_title">Внимание!</string>
     <string name="warning_dialog_msg">Отсутствует подключение к сети</string>
     <string name="warning_dialog_pos_button">Настройки</string>

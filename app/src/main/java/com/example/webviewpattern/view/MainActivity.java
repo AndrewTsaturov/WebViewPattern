@@ -66,12 +66,8 @@ public class MainActivity extends DaggerActivity implements IView{
 
         networkWarningDialog.dismiss();
 
-        gameWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                presenter.gameIsLoaded();
-            }
-        });
+
+        gameWebView.setWebViewClient(new WebViewClient());
         gameWebView.setWebChromeClient(new WebChromeClient());
 
         presenter.onViewInit();
@@ -111,7 +107,7 @@ public class MainActivity extends DaggerActivity implements IView{
     }
 
     @Override
-    public void showGame(String gameUrl) {
+    public void showPage(String gameUrl) {
         gameWebView.loadUrl(gameUrl);
     }
 

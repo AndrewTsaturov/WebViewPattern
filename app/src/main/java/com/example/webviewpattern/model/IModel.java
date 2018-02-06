@@ -6,7 +6,14 @@ package com.example.webviewpattern.model;
  */
 
 public interface IModel {
+    String SERVER_RESPONSE_POSITIVE = "1";
+    String SERVER_RESPONSE_NEGATIVE = "0";
+
     String getUrl();
 
     boolean isConnected();
+
+    boolean getServerResponse();
+
+    String getServerLink();
 }
